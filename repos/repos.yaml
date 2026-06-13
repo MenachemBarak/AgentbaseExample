@@ -1,0 +1,50 @@
+# DriveEasy Car Rental — repos manifest (west format).
+#
+# `agentbase sync-all` clones these into repos/internal/ and repos/opensource/.
+# URLs are illustrative (DriveEasy is a fictional example company).
+#
+#   agentbase sync-all                 # the internal platform repos
+#   agentbase sync-all -g opensource   # the vendored frameworks too
+
+manifest:
+  remotes:
+    - name: driveeasy
+      url-base: https://github.com/driveeasy
+
+  defaults:
+    remote: driveeasy
+    revision: main
+
+  projects:
+    # --- internal: the DriveEasy rental-car platform ----------------------
+    - name: booking-system
+      path: repos/internal/booking-system
+      groups: [internal]
+    - name: fleet-telematics
+      path: repos/internal/fleet-telematics
+      groups: [internal]
+    - name: pricing-engine
+      revision: v2.1.0
+      path: repos/internal/pricing-engine
+      groups: [internal]
+    - name: counter-terminal
+      path: repos/internal/counter-terminal
+      groups: [internal]
+
+    # --- opensource: the agentic frameworks the bases build on ------------
+    - name: headroom
+      url: https://github.com/chopratejas/headroom
+      path: repos/opensource/headroom
+      groups: [opensource]
+    - name: squad
+      url: https://github.com/bradygaster/squad
+      path: repos/opensource/squad
+      groups: [opensource]
+    - name: conductor
+      url: https://github.com/microsoft/conductor
+      path: repos/opensource/conductor
+      groups: [opensource]
+
+  # The platform repos sync by default; pull the open-source frameworks with
+  # `agentbase sync-all -g opensource`.
+  group-filter: [-opensource]

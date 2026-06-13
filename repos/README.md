@@ -20,3 +20,18 @@ private) and `opensource/` (public or vendored upstreams).
 
 Branch teams own their slice: the Rental Counter subteam touches `counter-terminal`,
 while Sofia Marin's fleet coordination work lives in `fleet-telematics`.
+
+## Syncing
+
+These repositories are declared in [`repos.yaml`](repos.yaml), a west-format
+manifest. From this example project, `agentbase sync-all` clones the internal
+platform repos into `internal/`; add `-g opensource` to also clone the vendored
+frameworks into `opensource/`:
+
+```bash
+agentbase sync-all                 # booking-system, fleet-telematics, …
+agentbase sync-all -g opensource   # headroom, squad, conductor too
+```
+
+(The DriveEasy URLs are illustrative — it's a fictional example company.)
+
