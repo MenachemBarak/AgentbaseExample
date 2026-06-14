@@ -34,10 +34,11 @@ Get every customer on the road quickly with a reliable, fairly-priced vehicle an
 friendly service.
 
 ## Divisions
-DriveEasy delivers all of this through four divisions. See
+DriveEasy delivers all of this through five divisions. See
 [divisions/divisions.md](divisions/divisions.md) for the full index and boundaries.
 
 - **Rental Operations** — runs the regions, branches, and counters that serve customers.
 - **Fleet Management** — buys, maintains, and balances the vehicles.
 - **Customer Experience** — owns the booking journey, support, and loyalty.
 - **Finance & Administration** — handles pricing economics, billing, and compliance.
+- **Technology** — builds and maintains the platform software, and fixes its bugs.

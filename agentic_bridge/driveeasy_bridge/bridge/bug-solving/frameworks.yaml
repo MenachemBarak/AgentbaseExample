@@ -1,0 +1,62 @@
+# bug-solving — a declared squad for DriveEasy
+#
+# This bridge declares a `squad` (https://github.com/bradygaster/squad) built
+# around DriveEasy's own company roles. A squad is "human-led AI agent teams":
+# one human leads a set of specialist agents that live as files in the repo. Here
+# the specialists ARE the Technology -> Platform Engineering team's roles, so the
+# squad mirrors the real org. See setup.md for the full mapping and use_cases/ for
+# how a bug is actually worked.
+
+bridge: bug-solving
+purpose: >-
+  Triage and fix a production bug on the DriveEasy platform repos, human-led,
+  with a failing-test gate before anything ships.
+
+# The frameworks this bridge is built on (from agentic_bridge/frameworks/).
+frameworks:
+  - name: squad
+    category: agentic_teams
+    repo: https://github.com/bradygaster/squad
+    role: orchestration            # gives us the human-led specialist agent team
+  - name: headroom
+    category: context_compression
+    repo: https://github.com/chopratejas/headroom
+    role: context                  # compress logs/telematics/transcripts for the agents
+
+# The human who leads the squad (one person leads; agents do the specialized work).
+led_by:
+  role: role_tech-lead
+  holder: Omar Haddad
+  company_path: >-
+    company/divisions/technology/teams/platform-engineering/roles/role_tech-lead.md
+
+# Each squad agent is BOUND to a real role in company/. No invented people —
+# change the role file and the squad member changes with it.
+members:
+  - squad_agent: lead
+    role: role_tech-lead
+    holder: Omar Haddad
+    company_path: company/divisions/technology/teams/platform-engineering/roles/role_tech-lead.md
+  - squad_agent: frontend
+    role: role_frontend-engineer
+    holder: Lena Fischer
+    company_path: company/divisions/technology/teams/platform-engineering/roles/role_frontend-engineer.md
+  - squad_agent: backend
+    role: role_backend-engineer
+    holder: Raj Mehta
+    company_path: company/divisions/technology/teams/platform-engineering/roles/role_backend-engineer.md
+  - squad_agent: tester
+    role: role_qa-engineer
+    holder: Yuki Tanaka
+    company_path: company/divisions/technology/teams/platform-engineering/roles/role_qa-engineer.md
+  - squad_agent: scribe
+    role: role_tech-lead           # the lead also keeps the decision log in git
+    holder: Omar Haddad
+    company_path: company/divisions/technology/teams/platform-engineering/roles/role_tech-lead.md
+
+# The repositories the squad operates on (from repos/repos.yaml, internal group).
+repos:
+  - booking-system
+  - pricing-engine
+  - counter-terminal
+  - fleet-telematics

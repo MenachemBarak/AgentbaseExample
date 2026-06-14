@@ -1,10 +1,10 @@
 # DriveEasy Car Rental — Divisions
 
-DriveEasy Car Rental is structured into **four divisions** that split the work of
+DriveEasy Car Rental is structured into **five divisions** that split the work of
 renting vehicles end to end. Together they cover the full rental lifecycle —
-**reserve → pickup → in-use → return → invoice** — with each division owning a
-clear slice and handing off cleanly to the others. All four report up to CEO
-**Elena Reyes**.
+**reserve → pickup → in-use → return → invoice** — plus the software it all runs
+on, with each division owning a clear slice and handing off cleanly to the others.
+All five report up to CEO **Elena Reyes**.
 
 ## Rental Operations
 The customer-facing engine of the company: it runs the **regions, groups of
@@ -39,9 +39,21 @@ Customer Experience apply them at the point of sale. The boundary: Finance defin
 fair, profitable pricing and closes the books, while the other divisions execute
 within those limits.
 
+## Technology
+Owns the **software DriveEasy runs on** — the `booking-system`, `pricing-engine`,
+`counter-terminal`, and `fleet-telematics` repos. Where the other four divisions
+*use* these platforms, Technology *owns the code*: shipping features, keeping
+production healthy, and fixing the bugs that reach customers and branch staff. It
+is led by **CTO Nadia Brandt** (an active code contributor) through the **Platform
+Engineering** team. The boundary: the business divisions decide *what* the software
+must do; Technology owns *how* it is built and repaired. This is where DriveEasy's
+agentic transformation of platform maintenance lives — see the **bug-solving
+squad** under `agentic_bridge/driveeasy_bridge/`.
+
 ## How the boundaries fit together
-A typical rental crosses all four: **Customer Experience** captures the booking,
-**Fleet Management** supplies a ready vehicle, **Rental Operations** checks the
-customer in and out at the branch, and **Finance & Administration** prices the
-deal and issues the invoice. Clean handoffs between these divisions are what make
-a DriveEasy rental feel effortless.
+A typical rental crosses all four operational divisions: **Customer Experience**
+captures the booking, **Fleet Management** supplies a ready vehicle, **Rental
+Operations** checks the customer in and out at the branch, and **Finance &
+Administration** prices the deal and issues the invoice — all running on platforms
+that **Technology** builds and keeps healthy. Clean handoffs between these divisions
+are what make a DriveEasy rental feel effortless.
