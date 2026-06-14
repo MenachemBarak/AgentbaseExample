@@ -1,53 +1,43 @@
-# Setup — the bug-solving squad
+# Setup — DriveEasy's bug-solving squad pattern
 
-This bridge declares a **squad** ([bradygaster/squad](https://github.com/bradygaster/squad))
-for DriveEasy: a human-led team of specialist AI agents that **triage and fix a
-production bug** on the platform repos. The machine-readable declaration is in
-[`frameworks.yaml`](frameworks.yaml); this file explains it.
+This bridge folder is the **adaptation pattern**: how DriveEasy binds the generic
+[`squad`](https://github.com/bradygaster/squad) framework to its own company roles
+and repos. It is **not** the deployment — the live squad is deployed in a base:
 
-## The idea
+> **Deployment:** [`.agentbase/base_bug_solving/squads/booking-bug-squad/`](../../../../.agentbase/base_bug_solving/squads/booking-bug-squad/)
+> contains the real squad in squad's native `.squad/` format (a `team.md` roster +
+> per-member `agents/<name>/charter.md`).
 
-squad gives one person a coordinated set of specialist agents (lead, frontend,
-backend, tester, scribe) that live as files in the repo, each in its own context,
-tracked in git. The key DriveEasy move: **the specialists are not generic — they
-are bound to the company's own roles**. The squad mirrors the **Technology →
-Platform Engineering** team exactly, so the agentic setup and the org chart never
-drift apart.
+The machine-readable binding is in [`frameworks.yaml`](frameworks.yaml).
 
-## Member → company role binding
+## The pattern
 
-| squad agent | Company role | Holder | Role file |
-|---|---|---|---|
-| **lead** | `role_tech-lead` | Omar Haddad | […/role_tech-lead.md](../../../../company/divisions/technology/teams/platform-engineering/roles/role_tech-lead.md) |
-| **frontend** | `role_frontend-engineer` | Lena Fischer | […/role_frontend-engineer.md](../../../../company/divisions/technology/teams/platform-engineering/roles/role_frontend-engineer.md) |
-| **backend** | `role_backend-engineer` | Raj Mehta | […/role_backend-engineer.md](../../../../company/divisions/technology/teams/platform-engineering/roles/role_backend-engineer.md) |
-| **tester** | `role_qa-engineer` | Yuki Tanaka | […/role_qa-engineer.md](../../../../company/divisions/technology/teams/platform-engineering/roles/role_qa-engineer.md) |
-| **scribe** | `role_tech-lead` | Omar Haddad | (the lead keeps the decision log in git) |
+squad gives one human a coordinated set of specialist agents (lead, frontend,
+backend, tester, scribe). DriveEasy's rule: **the specialists are bound to real
+`company/` roles**, so the squad mirrors the **Technology → Platform Engineering**
+team and never drifts from the org chart.
 
-The squad is **led by** the Tech Lead (`role_tech-lead`, Omar Haddad) — one human
-leads, the agents do the specialized work.
+| squad agent | Company role | Holder |
+|---|---|---|
+| lead | `role_tech-lead` | Omar Haddad |
+| frontend | `role_frontend-engineer` | Lena Fischer |
+| backend | `role_backend-engineer` | Raj Mehta |
+| tester | `role_qa-engineer` | Yuki Tanaka |
+| scribe | `role_tech-lead` (decision log) | Omar Haddad |
 
-## How to set it up
+The role files live under
+`company/divisions/technology/teams/platform-engineering/roles/`.
 
-1. **Pick the runtime.** Run the squad under one of the harnesses the company
-   supports (e.g. Copilot CLI / Claude Code). squad works with GitHub Copilot.
-2. **Materialize the repos.** `agentbase sync-all` clones the platform repos from
-   [`repos/repos.yaml`](../../../../repos/repos.yaml) into `repos/internal/`
-   (`booking-system`, `pricing-engine`, `counter-terminal`, `fleet-telematics`).
-3. **Seed each squad agent from its role file.** For every row above, give the
-   agent the responsibilities/purpose from its `company/` role file as its brief —
-   so the `frontend` agent behaves like DriveEasy's actual front-end engineer.
-4. **Add context compression.** Wire `headroom` (from
-   `agentic_bridge/frameworks/context_compression/headroom/`) so the agents'
-   logs, stack traces, and telematics dumps are compressed before they hit the
-   model — bug tickets get noisy fast.
-5. **Run it human-led.** Omar (lead) sets the goal and approves the fix; the
-   engineers work their layer; Yuki (tester) gates on a failing-then-passing test.
+## How a base uses this pattern
 
-## The rule this demonstrates
+1. A base whose purpose needs a squad (here, `base_bug_solving`) declares the squad
+   under its `squads/` folder in squad's native `.squad/` format.
+2. Each member's `charter.md` is **derived from the company role** named above —
+   that is this pattern applied.
+3. The base wires the squad to its repos (`booking-system`, `pricing-engine`,
+   `counter-terminal`, `fleet-telematics`) and to `headroom` for context
+   compression, then runs it human-led, with the Tester's failing-test gate.
 
-A squad is **declared**, not improvised: a `frameworks.yaml` that names the
-framework(s) and **binds each agent to a real `company/` role**, plus a `setup.md`
-that says how to wire it to the company's repos and harness. That is how, per
-`HOW_TO_USE_AGENTBASE.md`, an agentic transformation is expressed — Layer-1
-(`bridge` + `company` + `repos`) composed into a concrete, repeatable team.
+So: **framework** (squad) → **pattern** (this bridge: bind to company roles) →
+**deployment** (`base_bug_solving`'s `.squad/`). See
+[`use_cases/solve-bug.md`](use_cases/solve-bug.md) for a concrete run.

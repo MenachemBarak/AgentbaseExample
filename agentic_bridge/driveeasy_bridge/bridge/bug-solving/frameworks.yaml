@@ -1,16 +1,17 @@
-# bug-solving — a declared squad for DriveEasy
+# bug-solving — DriveEasy's squad adaptation pattern
 #
-# This bridge declares a `squad` (https://github.com/bradygaster/squad) built
-# around DriveEasy's own company roles. A squad is "human-led AI agent teams":
-# one human leads a set of specialist agents that live as files in the repo. Here
-# the specialists ARE the Technology -> Platform Engineering team's roles, so the
-# squad mirrors the real org. See setup.md for the full mapping and use_cases/ for
-# how a bug is actually worked.
+# This bridge is the PATTERN: how DriveEasy binds the generic `squad` framework
+# (https://github.com/bradygaster/squad) to its own company roles. It is NOT the
+# deployment — the live squad runs in a base (see `deployed_in` below), in squad's
+# native `.squad/` format. See setup.md for the mapping and use_cases/ for a run.
 
 bridge: bug-solving
 purpose: >-
   Triage and fix a production bug on the DriveEasy platform repos, human-led,
   with a failing-test gate before anything ships.
+
+# Where this pattern is actually deployed (the base + its native squad).
+deployed_in: .agentbase/base_bug_solving/squads/booking-bug-squad
 
 # The frameworks this bridge is built on (from agentic_bridge/frameworks/).
 frameworks:
@@ -22,6 +23,7 @@ frameworks:
     category: context_compression
     repo: https://github.com/chopratejas/headroom
     role: context                  # compress logs/telematics/transcripts for the agents
+
 
 # The human who leads the squad (one person leads; agents do the specialized work).
 led_by:
